@@ -1,0 +1,12 @@
+
+    {
+  "emmet.includeLanguages": {
+    "django-html": "html"
+  },
+  "python.languageServer": "Pylance",
+  "python.defaultInterpreterPath": "/path/to/your/venv/bin/python",
+  "python.autoComplete.extraPaths": [
+    "./your_django_project"
+  ]
+}   
+
