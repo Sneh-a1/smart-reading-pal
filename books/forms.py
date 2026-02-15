@@ -18,7 +18,7 @@ class RatingWidget(forms.NumberInput):
 class BookForm(forms.ModelForm):
     class Meta:
         model=Book
-        fields=['title','author','description','genre','IBSN','publication_date','average_rating']
+        fields=['title','author','description','genre','IBSN','publication_date','average_rating','image_url']
         labels={
             'title':'Title',
             'author':'Author',

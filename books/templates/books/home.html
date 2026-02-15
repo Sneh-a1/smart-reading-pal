@@ -1,14 +1,71 @@
 {% extends 'books/base.html' %}
-{% block carausel %}
- 
-{% endblock carausel %}
+
 {% block hero %}
-<section>
-<div class="flex  mx-10 my-1 border-gray-400 border bg-white">
-    <section class="flex-col items-left m-2 text-gray-600 h-screen">
-        <a href ='#' class="flex text-blue-600 py-4">Trending Books</a>
-        <h1 class="text-2xl"> Trending Books: Now</h1>
-        <p> See what readers from all over the world have in their bookshelves.</p>
-    </section>
+<div class="flex flex-col bg-white  space-y-12 px-4 py-8 border-gray-400 border mx-10 my-1">
+
+    {% if genres %}
+        {% for genre in genres %}
+        <div class="w-full relative">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">{{ genre.name }}</h2>
+
+            <!-- Left Arrow -->
+            <button onclick="slideLeft('{{ genre.id }}')"
+                class="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-gray-100">
+                ◀
+            </button>
+
+            <!-- Slider -->
+            <div class="overflow-hidden">
+                <div id="slider-{{ genre.id }}"
+                     class="flex transition-transform duration-300 ease-in-out">
+                    {% for book in genre.books.all|slice:":12" %}
+                    <div class="flex-shrink-0 w-1/2 md:w-1/4 lg:w-1/6 px-2 bg-white rounded-lg shadow hover:shadow-lg flex flex-col">
+                        <div class="aspect-square overflow-hidden rounded-t-lg bg-gray-100">
+                            {% if book.image %}
+                                <img src="{{ book.image.url }}" alt="{{ book.title }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <div class="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                                    No Image
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-semibold text-sm line-clamp-2">{{ book.title }}</h3>
+                            <p class="text-xs text-gray-600 mt-1">{{ book.author }}</p>
+                            <p class="text-xs text-gray-500 mt-1">{{ book.publication_date|date:"M d, Y" }}</p>
+                            <div class="flex items-center mt-2">
+                                <span class="text-yellow-500">★</span>
+                                <span class="text-xs font-semibold ml-1">{{ book.average_rating }}/5</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Right Arrow -->
+            <button onclick="slideRight('{{ genre.id }}')"
+                class="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hover:bg-gray-100">
+                ▶
+            </button>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="text-center text-gray-500 py-12">
+            <p>No genres or books available</p>
+        </div>
+    {% endif %}
+
 </div>
+
+<!-- Line Clamp Style -->
+<style>
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+</style>
+
 {% endblock hero %}

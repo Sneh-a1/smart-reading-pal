@@ -1,6 +1,7 @@
 from django.urls import path
-from books.views import home
+from books.views import home,trending
 
 urlpatterns = [
-    path('browse/',home,name ='home'),
+    path('',home,name ='home'),
+    path('trending/',trending,name='trending'),
 ]

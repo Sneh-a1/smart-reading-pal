@@ -1,4 +1,5 @@
 {% load static tailwind_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 <body class="bg-amber-100 text-black leading-normal tracking-normal inter-fontChoice">
 <nav>
     <div>
-    <ul class="flex justify-items-center border-2 border-black px-6 py-10 text-xl justify-between mx-10 ">
+    <ul class="flex justify-items-center px-6 py-10 text-xl justify-between mx-10 ">
         <li>Logo</li>
         <li><a href="#" >My Books</a></li>
         <li><a href="{% url 'home' %}">Browse</a></li>
@@ -53,5 +54,8 @@
 </div>
 
 {% endblock hero %}
+
+<script src="{% static 'js/slider.js' %}"></script>
 </body>
+
 </html>
